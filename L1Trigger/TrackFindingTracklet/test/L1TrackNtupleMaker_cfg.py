@@ -67,7 +67,7 @@ if GEOMETRY == "D49":
   #inputMC = getCMSdataFromCards()
 
   # Or read .root files from directory on local computer:
-  #dirName = "$myDir/whatever/"
+  #dirName = "$scratchmc/MCsamples1130_D76/RelVal/TTbar/PU200/"
   #inputMC=getCMSlocaldata(dirName)
 
   # Or read specified dataset (accesses CMS DB, so use this method only occasionally):
@@ -93,6 +93,8 @@ process.Timing = cms.Service("Timing", summaryOnly = cms.untracked.bool(True))
 ############################################################
 
 process.load('L1Trigger.TrackTrigger.TrackTrigger_cff')
+process.load('L1Trigger.TrackerTFP.ProducerES_cff')
+process.load('L1Trigger.TrackerTFP.ProducerLayerEncoding_cff')
 
 # remake stubs? 
 #from L1Trigger.TrackTrigger.TTStubAlgorithmRegister_cfi import *
@@ -145,8 +147,8 @@ elif (L1TRKALGO == 'HYBRID_DISPLACED'):
     
 # LEGACY ALGORITHM (EXPERTS ONLY): TRACKLET  
 elif (L1TRKALGO == 'TRACKLET'):
-    print "\n WARNING: This is not the baseline algorithm! Prefer HYBRID or HYBRID_DISPLACED!"
-    print "\n To run the Tracklet-only algorithm, ensure you have commented out 'CXXFLAGS=-DUSEHYBRID' in BuildFile.xml & recompiled! \n"
+    print("\n WARNING: This is not the baseline algorithm! Prefer HYBRID or HYBRID_DISPLACED!")
+    print("\n To run the Tracklet-only algorithm, ensure you have commented out 'CXXFLAGS=-DUSEHYBRID' in BuildFile.xml & recompiled! \n")
     process.TTTracksEmulation = cms.Path(process.L1THybridTracks)
     process.TTTracksEmulationWithTruth = cms.Path(process.L1THybridTracksWithAssociators)
     NHELIXPAR = 4
