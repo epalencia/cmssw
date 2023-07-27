@@ -117,7 +117,7 @@ namespace pathStatusExpression {
     bool evaluate(edm::Event const& event) const override {
       T op;
       return op(left_->evaluate(event), right_->evaluate(event));
-    }
+    }t
 
   private:
     edm::propagate_const<std::unique_ptr<Evaluator>> left_;
